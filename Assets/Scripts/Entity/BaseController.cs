@@ -4,7 +4,7 @@ public class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] protected SpriteRenderer characterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -56,7 +56,7 @@ public class BaseController : MonoBehaviour
 
     }
 
-    private void Movment(Vector2 direction)
+    protected virtual void Movment(Vector2 direction)
     {
         direction = direction * statHandler.Speed;
         if (knockbackDuration > 0.0f)
@@ -75,9 +75,6 @@ public class BaseController : MonoBehaviour
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         characterRenderer.flipX = isLeft;
-
-
-
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)

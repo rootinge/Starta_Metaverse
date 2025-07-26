@@ -14,9 +14,6 @@ public class PlayerController : BaseController
         camera = Camera.main;
     }
 
-   
-
-    // Update is called once per frame  
     protected override void HandleAction()
     {
         float horiziontal = Input.GetAxisRaw("Horizontal");

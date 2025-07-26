@@ -15,7 +15,6 @@ public class AnimationHandler : MonoBehaviour
 
     public void Move(Vector2 obj)
     {
-        Debug.Log(obj);
         animator.SetBool(IsMoving, obj.magnitude > .5f);
     }
 
