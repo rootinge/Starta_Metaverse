@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerType
+{
+    Mushroom,
+    Slime
+}
+
 public class FireWaterController : BaseController
 {
-    public enum PlayerType
-    {
-        Mushroom,
-        Slime
-    }
+
+
     bool startFlipX;
 
     public PlayerType playerName;
@@ -109,10 +112,33 @@ public class FireWaterController : BaseController
             }
         }
     }
-
-    public void Die()
+    public override void Death()
     {
+        if (isDead) return;
+
+        // 애니메이션 죽음 처리
+        animationHandler.Death();
+
+        DeleteMotion();
         
+
+        // 모든 플레이어의 Death 메소드 호출
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            go.GetComponent<FireWaterController>().DeleteMotion();
+        }
+        Destroy(gameObject, .6f); // 1초 후에 오브젝트 삭제
+    }
+
+    private void DeleteMotion()
+    {
+        // 움직임 삭제
+        _rigidbody.velocity = Vector2.zero;
+        // 중력 삭제
+        _rigidbody.bodyType = RigidbodyType2D.Static;
+
+        // 죽음 상태 설정, 키입력 삭제
+        isDead = true;
     }
 
 } 

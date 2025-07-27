@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
@@ -15,10 +16,12 @@ public class BaseController : MonoBehaviour
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
+    protected bool isDead = false;
+
     protected AnimationHandler animationHandler;
     protected StatHandler statHandler;
 
-
+    
 
     protected bool isAttacking;
     private float timeSinceLastAttack = float.MaxValue;
@@ -38,12 +41,16 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
+        if(isDead) return;
+
         HandleAction();
         Rotate(lookDirection);
     }
 
     protected virtual void FixedUpdate()
     {
+        if (isDead) return;
+
         Movment(movementDirection);
         if (knockbackDuration > 0.0f)
         {
@@ -81,6 +88,11 @@ public class BaseController : MonoBehaviour
     {
         knockbackDuration = duration;
         knockback = -(other.position - transform.position).normalized * power;
+    }
+
+    public virtual void Death()
+    {
+
     }
 
 }
