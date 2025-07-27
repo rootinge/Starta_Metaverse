@@ -71,13 +71,11 @@ public class FireWaterController : BaseController
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.7f, LayerMask.GetMask("Ground"));
             if (hit.collider != null)
             {
-                Debug.Log("바닥에 닿음");
                 // 바닥에 닿았을 때
                 isJumping = false;
             }
             else
             {
-                Debug.Log("바닥에 닿지 않음");
                 // 떨어지는 중
                 isJumping = true;
             }
@@ -121,6 +119,7 @@ public class FireWaterController : BaseController
 
         DeleteMotion();
         
+        FWGameManager.Instance.GameOver();
 
         // 모든 플레이어의 Death 메소드 호출
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
@@ -141,4 +140,8 @@ public class FireWaterController : BaseController
         isDead = true;
     }
 
+    public void GameClear()
+    {
+        DeleteMotion();
+    }
 } 
