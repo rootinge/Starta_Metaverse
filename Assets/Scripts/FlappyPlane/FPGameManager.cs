@@ -33,9 +33,19 @@ public class FPGameManager : MonoBehaviour
         uiManager.SetRestart();
     }
 
+    void ScoreStorage()
+    {
+        if (DataManager.Instance.flappyPlaneBestScore < currentScore)
+        {
+            DataManager.Instance.flappyPlaneBestScore = currentScore;
+        }
+        DataManager.Instance.flappyPlaneRecentlyScore = currentScore;
+    }
+
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ScoreStorage();
+        SceneManager.LoadScene("MainScene");
     }
 
     public void AddScore(int score)

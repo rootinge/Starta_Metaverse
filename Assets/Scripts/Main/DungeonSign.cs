@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,8 +22,13 @@ public class DungeonSign : MonoBehaviour
     [SerializeField] private Text dugeonNameText;
     [SerializeField] private Text bastScoreText;
     [SerializeField] private Text recentlyScoreText;
-    
+    [SerializeField] private Text recordText;
 
+    private void Awake()
+    {
+        dungeonSignUI.SetActive(false);
+        recordText.gameObject.SetActive(false);
+    }
 
 
 
@@ -48,13 +51,12 @@ public class DungeonSign : MonoBehaviour
                 Debug.LogError("Unknown dungeon type: " + dungeonType);
                 break;
         }
-
-        dungeonSignUI.SetActive(false);
+        NewRecord(float.Parse(recentlyScoreText.text), float.Parse(bastScoreText.text));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
             dungeonSignUI.SetActive(true);
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -68,4 +70,14 @@ public class DungeonSign : MonoBehaviour
         MainGameManager.Instance.PlayerTransformStorage();
         SceneManager.LoadScene(dungeonSceneName);
     }
+
+    private void NewRecord(float bast, float recently)
+    {
+        if (bast != 0 && bast == recently)
+        {
+            recordText.gameObject.SetActive(true);
+        }
+    }
+
+
 }

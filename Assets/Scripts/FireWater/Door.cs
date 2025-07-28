@@ -58,4 +58,6 @@ public class Door : MonoBehaviour
     {
         FWGameManager.Instance.Exit();
     }
+
+
 }

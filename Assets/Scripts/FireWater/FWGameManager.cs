@@ -43,6 +43,9 @@ public class FWGameManager : MonoBehaviour
 
     public void Exit()
     {
+        if (!isGameClear)
+            DataManager.Instance.fireWaterRecentlyScore = 0;
+
         SceneManager.LoadScene("MainScene");
     }
 
