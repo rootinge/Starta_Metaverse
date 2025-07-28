@@ -48,11 +48,15 @@ public class FWGameManager : MonoBehaviour
 
     public void ScoreStorage()
     {
-        if (DataManager.Instance.fireWaterBastScore > timeScore)
+        if(DataManager.Instance.fireWaterBastScore == 0)
         {
             DataManager.Instance.fireWaterBastScore = timeScore;
         }
-        DataManager.Instance.fireWaterLastScore = timeScore;
+        else if (DataManager.Instance.fireWaterBastScore > timeScore)
+        {
+            DataManager.Instance.fireWaterBastScore = timeScore;
+        }
+        DataManager.Instance.fireWaterRecentlyScore = timeScore;
         Debug.Log("점수 저장 완료: " + timeScore);
     }
 

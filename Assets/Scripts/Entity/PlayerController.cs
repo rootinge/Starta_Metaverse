@@ -12,6 +12,11 @@ public class PlayerController : BaseController
     {
         base.Start();
         camera = Camera.main;
+
+        if (DataManager.Instance.oldPlayerPos !=null)
+        {
+            transform.position = DataManager.Instance.oldPlayerPos.Value;
+        }
     }
 
     protected override void HandleAction()

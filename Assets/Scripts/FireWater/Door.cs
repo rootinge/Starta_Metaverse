@@ -41,6 +41,7 @@ public class Door : MonoBehaviour
     {
         anim.SetTrigger("IsOpen");
         FWGameManager.Instance.ScoreStorage();
+        FWGameManager.Instance.isGameClear = true;
 
         // 모든 플레이어 게임 클리어시 움직임 제거
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))

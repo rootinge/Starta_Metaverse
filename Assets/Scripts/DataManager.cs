@@ -6,12 +6,13 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance { get { return instance;}}
 
     public float fireWaterBastScore;
-    public float fireWaterLastScore;
+    public float fireWaterRecentlyScore;
 
     public int flappyPlaneBestScore;
-    public int flappyPlaneLastScore;
+    public int flappyPlaneRecentlyScore;
 
-    public Transform oldPlayerTransform;
+    [SerializeField]
+    public Vector3? oldPlayerPos;
 
     private void Awake()
     {
@@ -26,10 +27,10 @@ public class DataManager : MonoBehaviour
         }
 
         fireWaterBastScore = 0;
-        fireWaterLastScore = 0;
+        fireWaterRecentlyScore = 0;
         flappyPlaneBestScore = 0;
-        flappyPlaneLastScore = 0;
-        oldPlayerTransform = null;
+        flappyPlaneRecentlyScore = 0;
+        oldPlayerPos = null;
     }
 
 }
